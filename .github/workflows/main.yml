@@ -36,7 +36,7 @@ jobs:
         run: |
           docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
-          docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA Dockerfile1 .
+          docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA -f Dockerfile1 .
           docker push ${{ env.ECR_REG1 }}:$GITHUB_SHA 
           echo "::set-output name=image::$GITHUB_SHA"
          
