@@ -36,8 +36,6 @@ jobs:
         run: |
           docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA -f Dockerfile_Worker .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
-          docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA -f Dockerfile_Api .
-          docker push ${{ env.ECR_REG1 }}:$GITHUB_SHA
           echo "::set-output name=image::$GITHUB_SHA"
          
                                           
@@ -51,7 +49,6 @@ jobs:
         with:
           event-type: build
           workflow: CD
-          # workflow: CD-TESTING
           repository: techvishal1988/DotNetEFCoreWithSQS-CD
-          token: ${{ secrets.REPO_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           client-payload: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "organization-worker", "env_name": "dev"}'
