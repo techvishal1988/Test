@@ -3,7 +3,7 @@ on:
   push:
     branches: ["main"]
 env:
-   ECR_REG: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-api
+   ECR_REG: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-worker
 jobs:
   build:
     name: Build and Pushing the Image
@@ -34,7 +34,7 @@ jobs:
         run: |
           docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
-          echo "::set-output name=image1::$GITHUB_SHA"
+          echo "::set-output name=image::$GITHUB_SHA"
          
 
                                           
