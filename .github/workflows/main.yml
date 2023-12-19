@@ -4,6 +4,7 @@ on:
     branches: ["main"]
 env:
    ECR_REG: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-worker
+   ECR_REG1: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-api
       
 jobs:
   build:
@@ -33,8 +34,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
            
         run: |
-          docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA .
+          docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA -f Dockerfile_Worker .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
+          docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA -f Dockerfile_Api .
+          docker push ${{ env.ECR_REG1 }}:$GITHUB_SHA
           echo "::set-output name=image::$GITHUB_SHA"
          
                                           
