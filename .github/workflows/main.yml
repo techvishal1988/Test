@@ -4,6 +4,7 @@ on:
     branches: ["main"]
 env:
    ECR_REG: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-worker
+      
 jobs:
   build:
     name: Build and Pushing the Image
@@ -32,11 +33,11 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
            
         run: |
+          cd BikeStores.MSSQL
           docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
           echo "::set-output name=image::$GITHUB_SHA"
          
-
                                           
   release:
     runs-on: ubuntu-latest
