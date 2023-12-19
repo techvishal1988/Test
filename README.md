@@ -1,2 +1,1 @@
 # DotNetEFCoreWithSQS 
-First run
