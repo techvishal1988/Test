@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{steps.build-image.outputs.image }}
+      output2: ${{steps.build-image.outputs.image1 }}
                       
     steps:
       - name: Checkout
@@ -39,6 +40,7 @@ jobs:
           docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA -f Dockerfile1 .
           docker push ${{ env.ECR_REG1 }}:$GITHUB_SHA 
           echo "::set-output name=image::$GITHUB_SHA"
+          echo "::set-output name=image1::$GITHUB_SHA"
          
 
                                           
@@ -55,4 +57,5 @@ jobs:
           # workflow: CD-TESTING
           repository: techvishal1988/dot-net-CD
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          client-payload: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "guestbook", "env_name": "dev"}'
+          input: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "guestbook1", "env_name": "dev"}'
+          client-payload: '{"image_name": "${{ env.ECR_REG1 }}", "image_tag": "${{needs.build.outputs.output2}}", "app_repo": "guestbook2", "env_name": "dev"}'
