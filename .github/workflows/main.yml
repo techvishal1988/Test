@@ -4,7 +4,6 @@ on:
     branches: ["main"]
 env:
    ECR_REG: 485229547579.dkr.ecr.us-east-2.amazonaws.com/organization-worker
-   ECR_REG1: 485229547579.dkr.ecr.us-east-2.amazonaws.com/organization-api
       
 jobs:
   build:
@@ -50,5 +49,5 @@ jobs:
           event-type: build
           workflow: CD
           repository: techvishal1988/DotNetEFCoreWithSQS-CD
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.REPO_TOKEN }}
           client-payload: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "organization-worker", "env_name": "dev"}'
