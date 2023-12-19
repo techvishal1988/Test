@@ -46,7 +46,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           event-type: build
-          workflow: CD
+          workflow: CD-api
           repository: techvishal1988/DotNetEFCoreWithSQS-CD
           token: ${{ secrets.REPO_TOKEN }}
           client-payload: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "organization-api", "env_name": "dev"}'
