@@ -3,8 +3,7 @@ on:
   push:
     branches: ["main"]
 env:
-   ECR_REG: 485229547579.dkr.ecr.us-east-2.amazonaws.com/organization-worker
-      
+   ECR_REG: 485229547579.dkr.ecr.us-east-2.amazonaws.com/organization-worker   
 jobs:
   build:
     name: Build and Pushing the Image
