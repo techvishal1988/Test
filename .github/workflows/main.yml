@@ -4,15 +4,12 @@ on:
     branches: ["main"]
 env:
    ECR_REG: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-api
-   ECR_REG1: 485229547579.dkr.ecr.us-west-2.amazonaws.com/demo-worker
-      
 jobs:
   build:
     name: Build and Pushing the Image
     runs-on: ubuntu-latest
     outputs:
       output1: ${{steps.build-image.outputs.image }}
-      output2: ${{steps.build-image.outputs.image1 }}
                       
     steps:
       - name: Checkout
@@ -37,9 +34,6 @@ jobs:
         run: |
           docker build -t ${{ env.ECR_REG }}:$GITHUB_SHA .
           docker push ${{ env.ECR_REG }}:$GITHUB_SHA
-          docker build -t ${{ env.ECR_REG1 }}:$GITHUB_SHA -f Dockerfile1 .
-          docker push ${{ env.ECR_REG1 }}:$GITHUB_SHA 
-          echo "::set-output name=image::$GITHUB_SHA"
           echo "::set-output name=image1::$GITHUB_SHA"
          
 
@@ -57,5 +51,4 @@ jobs:
           # workflow: CD-TESTING
           repository: techvishal1988/dot-net-CD
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          input: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "guestbook1", "env_name": "dev"}'
-          client-payload: '{"image_name": "${{ env.ECR_REG1 }}", "image_tag": "${{needs.build.outputs.output2}}", "app_repo": "guestbook2", "env_name": "dev"}'
+          client-payload: '{"image_name": "${{ env.ECR_REG }}", "image_tag": "${{needs.build.outputs.output1}}", "app_repo": "guestbook1", "env_name": "dev"}'
