@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-worker
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: organization-worker
+  template:
+    metadata:
+      labels:
+        app: organization-worker
+    spec:
+      containers:
+      - image: 485229547579.dkr.ecr.ap-south-1.amazonaws.com/organization-worker:1.1
+        name: organization-worker
+        ports:
+        - containerPort: 80
