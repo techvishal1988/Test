@@ -1,4 +1,4 @@
-name: Node js app deploy to EKS
+name: DotNet app deploy to EKS
 on:
   push:
     branches: [ "main" ]
@@ -45,5 +45,5 @@ jobs:
       run: |
         kubectl apply -f deployment.yaml -n dev
         kubectl apply -f service.yaml -n dev
-        kubectl apply -f deployment-worker -n dev
-        kubectl apply -f service-worker -n dev
+        kubectl apply -f deployment_worker -n dev
+        kubectl apply -f service_worker -n dev
