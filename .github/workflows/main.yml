@@ -45,5 +45,5 @@ jobs:
       run: |
         kubectl apply -f deployment.yaml -n dev
         kubectl apply -f service.yaml -n dev
-        kubectl apply -f deployment_worker -n dev
-        kubectl apply -f service_worker -n dev
+        kubectl apply -f deployment_worker.yaml -n dev
+        kubectl apply -f service_worker.yaml -n dev
