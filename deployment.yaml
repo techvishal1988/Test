@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-api
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: organization-api
+  template:
+    metadata:
+      labels:
+        app: organization-api
+    spec:
+      containers:
+      - image: 485229547579.dkr.ecr.ap-south-1.amazonaws.com/test-eks:c207645ba59fb350b3586cafcbff628e037dc5ef
+        name: organization-api
+        ports:
+        - containerPort: 80
