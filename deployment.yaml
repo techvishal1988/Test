@@ -14,7 +14,7 @@ spec:
         app: organization-api
     spec:
       containers:
-      - image: 485229547579.dkr.ecr.ap-south-1.amazonaws.com/test-eks:c207645ba59fb350b3586cafcbff628e037dc5ef
+      - image: 485229547579.dkr.ecr.ap-south-1.amazonaws.com/test-eks:1.1
         name: organization-api
         ports:
         - containerPort: 80
